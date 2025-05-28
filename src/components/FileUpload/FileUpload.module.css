@@ -1,0 +1,56 @@
+.header {
+    font-family: "Geist Medium";
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    margin-bottom: 10px;
+}
+
+.drop-zone {
+    font-family: "Geist Medium";
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1;
+    width: clamp(250px, 85vw, 480px);
+    margin: 0 auto;
+    box-sizing: border-box;
+    border: 1px dashed #000000;
+    border-radius: 6px;
+    background-color: #F5F5F5;
+    user-select: none;
+    cursor: pointer;
+}
+
+.dragging {
+    border-color: #1e90ff;
+    background: #f0f8ff;
+}
+
+.hidden-input {
+    display: none;
+}
+
+.no-file {
+    color: #a3a3a3;
+}
+
+.continue-btn {
+    margin-top: 25px;
+    display: block;
+    width: 100%;
+    font-family: "Geist Medium";
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem); /* Fluid Between 12px and 14px */
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    user-select: none;
+    cursor: pointer;
+    background-color: #0a0a0a;
+    color: #fafafa;
+    transition: 0.3s ease;
+}
+
+.continue-btn:hover {
+    opacity: 90%;
+}

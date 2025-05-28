@@ -1,5 +1,7 @@
 import { useState } from "react";
 import styles from "./styles/StepOne.module.css";
+import FileUpload from "../components/FileUpload/FileUpload";
+import TypeText from "../components/TypeText/TypeText";
 
 export default function StepOne() {
     const [activeTab, setActiveTab] = useState("file");
@@ -22,6 +24,10 @@ export default function StepOne() {
                     onClick={() => handleClick('text')}
                 >Type Text</button>
             </div>
+
+            {
+                activeTab === "file" ? (<FileUpload/>) : (<TypeText/>)
+            }
         </section>
     )
 }
