@@ -1,0 +1,122 @@
+.step-two-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-height: calc(100vh - 4rem);
+    padding-block: 4rem;
+}
+
+.step-title {
+    font-family: "Geist Bold";
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    margin-bottom: 40px;
+}
+
+.form-container {
+    width: clamp(250px, 85vw, 480px);
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+}
+
+.label-title:not(:first-child) {
+    margin-top: 30px;
+}
+
+.label-title {
+    margin-bottom: 10px;
+    font-family: "Geist Medium";
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+}
+
+.source-input {
+    border: none;
+    outline: none;
+    background-color: #F5F5F5;
+    padding: 12px;
+    border-radius: 4px;
+}
+
+.radio-container,
+.limit-container,
+.style-container
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.radio-container label,
+.limit-container label,
+.style-container label
+{
+    font-family: "Geist Regular";
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    display: inline-flex;
+    padding: 12px;
+    border-radius: 4px;
+    background-color: #F5F5F5;
+    user-select: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.radio-container label:hover,
+.limit-container label:hover,
+.style-container label:hover {
+    background-color: #e5e5e5;
+}
+
+.radio-container label input[type="radio"],
+.limit-container label input[type="radio"],
+.style-container label input[type="checkbox"]
+{
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.radio-container label.active,
+.limit-container label.active,
+.style-container label.active {
+    background-color: #0a0a0a;
+    color: white;
+}
+
+.continue-btn {
+    margin-top: 25px;
+    display: block;
+    width: 100%;
+    font-family: "Geist Medium";
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem); /* Fluid Between 12px and 14px */
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    user-select: none;
+    cursor: pointer;
+    background-color: #0a0a0a;
+    color: #fafafa;
+    transition: 0.3s ease;
+}
+
+.continue-btn:hover {
+    opacity: 90%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

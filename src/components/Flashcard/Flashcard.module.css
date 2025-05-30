@@ -1,0 +1,27 @@
+.flashcard-item {
+    background-color: #FAFAFA;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px;
+    border-radius: 6px;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    row-gap: 10px;
+    column-gap: 10px;
+    align-items: center;
+}
+
+.input-title {
+    font-family: "Geist Medium";
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+}
+
+.text-input {
+    font-family: "Geist Medium";
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    border: none;
+    outline: none;
+    padding: 12px;
+    border-radius: 4px;
+    background-color: #F5F5F5;
+}
