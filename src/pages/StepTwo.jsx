@@ -20,6 +20,17 @@ export default function StepTwo() {
         cardStyle: []
     })
 
+    const isFormValid = () => {
+        const { name, flashcardType, cardLimit, cardStyle } = formDetails;
+
+        return (
+            name.trim() !== "" &&
+            flashcardType.trim() !== "" &&
+            cardLimit.trim() !== "" &&
+            cardStyle.length > 0
+        );
+    };
+
     const flashcardOptions = ["Basic", "Reversible", "Cloze", "Multiple Choice"] // Flashcard Types
     const cardLimitOptions = [10, 20, 30] // Card Limit Options
     const cardStyleOptions = ["Minimal", "With Context", "Bullet Points", "Include Examples"] // Card Style Options
@@ -51,6 +62,11 @@ export default function StepTwo() {
 
     const handleSubmit =  (e) => {
         e.preventDefault();
+
+        if (!isFormValid()) {
+            alert("Please fill in all fields and choose at least one card style.");
+            return;
+        }
     }
 
     return (
