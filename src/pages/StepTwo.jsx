@@ -1,7 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./styles/StepTwo.module.css";
+import { useSteps } from "../context/StepsContext.jsx";
 
 export default function StepTwo() {
+    const navigate = useNavigate();
+    const { stepProgress } = useSteps();
+
+    useEffect(() => {
+        if (!stepProgress.stepOneComplete) {
+            navigate("/step-one");
+        }
+    }, [stepProgress, navigate]);
+
     const [formDetails, setFormDetails] = useState({
         name: "",
         flashcardType: "",

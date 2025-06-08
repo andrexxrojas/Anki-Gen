@@ -12,16 +12,16 @@ import StepThree from "./pages/StepThree.jsx";
 function App() {
   return (
     <div className="app-container">
-      <PageLayout>
-        <Router>
+      <Router>
+        <PageLayout>
           <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/step-one" element={<StepOne/>}/>
             <Route path="/step-two" element={<StepTwo/>}/>
             <Route path="/step-three" element={<StepThree/>}/>
           </Routes>
-        </Router>
-      </PageLayout>
+        </PageLayout>
+      </Router>
     </div>
   )
 }

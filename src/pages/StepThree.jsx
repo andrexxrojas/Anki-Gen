@@ -1,7 +1,18 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./styles/StepThree.module.css";
 import Flashcard from "../components/Flashcard/Flashcard.jsx";
+import { useSteps} from "../context/StepsContext.jsx";
 
 export default function StepThree() {
+    const navigate = useNavigate();
+    const { stepProgress } = useSteps();
+
+    useEffect(() => {
+        if (!stepProgress.stepTwoComplete) {
+            navigate("/step-two");
+        }
+    }, [stepProgress, navigate]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
