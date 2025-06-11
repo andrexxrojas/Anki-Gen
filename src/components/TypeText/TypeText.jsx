@@ -8,14 +8,33 @@ export default function TypeText() {
     const [textValue, setTextValue] = useState("");
     const navigate = useNavigate();
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (textValue.trim() === "") {
             alert("Please enter some text before submitting.");
             return;
         }
 
-        markStepComplete("stepOneComplete");
-        navigate("/step-two");
+        try {
+            const response = await fetch("http://localhost:3001/submit-text", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ text: textValue })
+            })
+
+            if (!response.ok) throw new Error("Text submission failed.");
+
+            const data = await response.json();
+
+            console.log("Server responded with text", data.text);
+
+            markStepComplete("stepOneComplete");
+            navigate("/step-two");
+        } catch (error) {
+            console.error("Text submission error", error);
+            alert("Failed to submit text.")
+        }
     }
 
     return (

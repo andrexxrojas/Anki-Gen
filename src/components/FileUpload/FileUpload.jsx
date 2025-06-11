@@ -63,14 +63,30 @@ export default function FileUpload() {
         inputRef.current.click();
     }
 
-    const handleSubmit = () => {
-        if (!file) {
-            alert("Please upload a file first.");
-            return;
-        }
+    const handleSubmit = async () => {
+        if (!file) return;
 
-        markStepComplete("stepOneComplete");
-        navigate("/step-two");
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+            const response = await fetch("http://localhost:3001/upload", {
+                method: "POST",
+                body: formData
+            })
+
+            if (!response.ok) throw new Error("Upload failed");
+
+            const data = await response.json();
+
+            console.log("Extracted text:", data.text);
+
+            markStepComplete("stepOneComplete");
+            navigate("/step-two");
+        } catch (error) {
+            console.error("Upload error:", error);
+            alert("Failed to upload and extract file.");
+        }
     }
 
     return (
@@ -83,8 +99,8 @@ export default function FileUpload() {
                 onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
             >
-                <input 
-                    type="file" 
+                <input
+                    type="file"
                     ref={inputRef}
                     className={styles['hidden-input']}
                     onChange={handleFileSelect}
