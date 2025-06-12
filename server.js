@@ -51,3 +51,6 @@ app.post('/submit-text', (req, res) => {
     res.json({ text });
 });
 
+// app.post("/generate-quiz", (prompt) => {
+
+// })

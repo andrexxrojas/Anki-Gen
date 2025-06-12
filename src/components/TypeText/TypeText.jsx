@@ -4,7 +4,7 @@ import {useSteps} from "../../context/StepsContext.jsx";
 import {useNavigate} from "react-router-dom";
 
 export default function TypeText() {
-    const { markStepComplete } = useSteps();
+    const { markStepComplete, setExtractedText } = useSteps();
     const [textValue, setTextValue] = useState("");
     const navigate = useNavigate();
 
@@ -27,8 +27,7 @@ export default function TypeText() {
 
             const data = await response.json();
 
-            console.log("Server responded with text", data.text);
-
+            setExtractedText(data);
             markStepComplete("stepOneComplete");
             navigate("/step-two");
         } catch (error) {

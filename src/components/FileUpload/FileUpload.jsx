@@ -8,7 +8,7 @@ export default function FileUpload() {
     const [isDragging, setIsDragging] = useState(false);
     const inputRef = useRef(null);
     const navigate = useNavigate();
-    const { markStepComplete } = useSteps();
+    const { markStepComplete, setExtractedText } = useSteps();
 
     const allowedTypes = [
         "application/pdf", // PDF
@@ -78,9 +78,8 @@ export default function FileUpload() {
             if (!response.ok) throw new Error("Upload failed");
 
             const data = await response.json();
-
-            console.log("Extracted text:", data.text);
-
+            
+            setExtractedText(data);
             markStepComplete("stepOneComplete");
             navigate("/step-two");
         } catch (error) {
