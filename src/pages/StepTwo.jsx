@@ -5,7 +5,7 @@ import { useSteps } from "../context/StepsContext.jsx";
 
 export default function StepTwo() {
     const navigate = useNavigate();
-    const { stepProgress } = useSteps();
+    const { stepProgress, extractedText } = useSteps();
 
     useEffect(() => {
         if (!stepProgress.stepOneComplete) {
@@ -60,12 +60,35 @@ export default function StepTwo() {
         })
     }
 
-    const handleSubmit =  (e) => {
+    const handleSubmit =  async (e) => {
         e.preventDefault();
 
         if (!isFormValid()) {
             alert("Please fill in all fields and choose at least one card style.");
             return;
+        }
+
+        try {
+            const response = await fetch("http://localhost:3001/generate-cards", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    text: extractedText,
+                    name: formDetails.name,
+                    flashcardType: formDetails.flashcardType,
+                    cardLimit: formDetails.cardLimit,
+                    cardStyle: formDetails.cardStyle
+                })
+            })
+
+            const data = await response.json();
+            console.log(data);
+
+        } catch (error) {
+            console.error("Error detected:", error);
+            alert("Failed to generate a flashcard.");
         }
     }
 

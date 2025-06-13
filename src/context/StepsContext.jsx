@@ -15,12 +15,8 @@ export const StepsProvider = ({ children }) => {
         setStepProgress((prev) => ({...prev, [step]: true}));
     };
 
-    const getExtractedText = () => {
-        return extractedText;
-    }
-
     return (
-        <StepsContext.Provider value={{ stepProgress, markStepComplete, setExtractedText }}>
+        <StepsContext.Provider value={{ stepProgress, markStepComplete, setExtractedText, extractedText }}>
             {children}
         </StepsContext.Provider>
     );

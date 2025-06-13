@@ -78,7 +78,7 @@ export default function FileUpload() {
             if (!response.ok) throw new Error("Upload failed");
 
             const data = await response.json();
-            
+
             setExtractedText(data);
             markStepComplete("stepOneComplete");
             navigate("/step-two");
