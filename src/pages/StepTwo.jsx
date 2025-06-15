@@ -5,7 +5,8 @@ import { useSteps } from "../context/StepsContext.jsx";
 
 export default function StepTwo() {
     const navigate = useNavigate();
-    const { stepProgress, extractedText } = useSteps();
+    const { stepProgress, markStepComplete, extractedText, setGeneratedDeck, generatedDeck } = useSteps();
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (!stepProgress.stepOneComplete) {
@@ -68,6 +69,8 @@ export default function StepTwo() {
             return;
         }
 
+        setLoading(true);
+
         try {
             const response = await fetch("http://localhost:3001/generate-cards", {
                 method: "POST",
@@ -75,7 +78,7 @@ export default function StepTwo() {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    text: extractedText,
+                    text: extractedText.text,
                     name: formDetails.name,
                     flashcardType: formDetails.flashcardType,
                     cardLimit: formDetails.cardLimit,
@@ -84,11 +87,18 @@ export default function StepTwo() {
             })
 
             const data = await response.json();
-            console.log(data);
 
+            const parsedDeck = JSON.parse(data.deck);
+
+            setGeneratedDeck(parsedDeck);
+
+            markStepComplete("stepTwoComplete");
+            navigate("/step-three");
         } catch (error) {
             console.error("Error detected:", error);
             alert("Failed to generate a flashcard.");
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -153,7 +163,11 @@ export default function StepTwo() {
                     }
                 </div>
 
-                <button className={styles['continue-btn']} onClick={handleSubmit}>Continue</button>
+                <button
+                    className={styles['continue-btn']}
+                    onClick={handleSubmit}
+                    disabled={loading}
+                >{loading ? "Generating..." : "Continue"}</button>
             </form>
         </div>
     )

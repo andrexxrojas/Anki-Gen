@@ -104,7 +104,7 @@ app.post("/generate-cards", async (req, res) => {
         })
 
         const generatedCards = completion.choices[0].message.content.trim();
-        res.json({ cards: generatedCards });
+        res.json({ deck: generatedCards });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Failed to generate cards." });

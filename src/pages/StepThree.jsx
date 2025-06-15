@@ -6,12 +6,15 @@ import { useSteps} from "../context/StepsContext.jsx";
 
 export default function StepThree() {
     const navigate = useNavigate();
-    const { stepProgress } = useSteps();
+    const { stepProgress, generatedDeck } = useSteps();
 
     useEffect(() => {
         if (!stepProgress.stepTwoComplete) {
             navigate("/step-two");
         }
+
+        console.log(generatedDeck);
+
     }, [stepProgress, navigate]);
 
     const handleSubmit = (e) => {
@@ -24,13 +27,14 @@ export default function StepThree() {
 
             <div className={styles['inner-container']}>
                 <label htmlFor="deck-name" className={styles['label-title']}>Deck Name</label>
-                <input className={styles['source-input']} type="text" name="deck-name"/>
+                <input className={styles['source-input']} type="text" name="deck-name" defaultValue={generatedDeck?.deckName}/>
 
                 <div className={styles['flashcards-container']}>
-                    <Flashcard/>
-                    <Flashcard/>
-                    <Flashcard/>
-                    <Flashcard/>
+                    {
+                        generatedDeck?.cards.map((card, index) => (
+                            <Flashcard key={index} front={card.question} back={card.answer}/>
+                        ))
+                    }
                 </div>
 
                 <button className={styles['continue-btn']} onClick={handleSubmit}>Continue</button>
